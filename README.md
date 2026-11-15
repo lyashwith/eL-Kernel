@@ -122,6 +122,9 @@ The goal of eL-Kernel is to learn and experiment with operating system developme
 
 This is an ongoing educational hobby project. Features and architecture may change as development progresses.
 
+
+<a href="https://github.com/lyashwith"> <img src="https://avatars.githubusercontent.com/u/313887780?s=100" alt="GitHub Logo" width="50"> </a>
+
 ## License
 
 Refer to the repository's license file for licensing information.
