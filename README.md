@@ -3,7 +3,7 @@
 <table align="center">
 <tr>
 <td align="center" valign="middle">
-<img src="https://raw.githubusercontent.com/lyashwith/eL-Kernel/main/images/eL-KernelLogo.png" width="150" />
+<img src="https://raw.githubusercontent.com/lyashwith/eL-Kernel/main/images/eL-KernelLogo.png" width="200" />
 </td>
 <td align="center" valign="middle">
 <h1>eL Kernel</h1>
