@@ -1,74 +1,124 @@
-# Limine C Template
+# eL-Kernel
 
-This repository will demonstrate how to set up a basic x86-64 kernel in C using
-Limine.
+**A hobby operating system kernel written in C for x86-64 architecture.**
 
-It is recommended to cross reference the contents of this repository with
-[the Limine Bare Bones](https://osdev.wiki/wiki/Limine_Bare_Bones) OSDev wiki
-page.
+eL-Kernel is a learning-oriented kernel development project built using C and the [Limine](https://github.com/limine-bootloader/limine) bootloader. The project focuses on understanding low-level system programming, kernel development, framebuffer graphics and operating system fundamentals.
 
-## How to use this?
+## Current Progress
 
-### Dependencies
+### First successful boot
 
-Any `make` command depends on GNU make (`gmake`) and is expected to be run
-using it. This usually means using `make` on most GNU/Linux distros, or `gmake`
-on other non-GNU systems.
+eL-Kernel successfully booting inside Oracle VirtualBox using the Limine bootloader.
 
-All `make all*` targets depend on a GNU-compatible C toolchain capable of
-generating x86-64 ELF objects. Usually `gcc/binutils` or `clang/llvm/lld`
-provided by any x86-64 UNIX like (including Linux) distribution will suffice.
+![eL-Kernel running in Oracle VirtualBox](images/vbelkernel.png)
 
-Building also requires `git`, used to fetch the kernel's dependencies (see
-`kernel/get-deps`), `curl`, used to download the Limine release and the EDK2
-OVMF firmware images, and a C compiler for the host (`cc` by default, see the
-`HOST_CC` `make` variable), used to build the `limine` host utility.
+**Boot configuration:** x86-64 · UEFI · 1024 × 768 framebuffer
 
-Additionally, building an ISO with `make all` requires `xorriso`, and building
-a HDD/USB image with `make all-hdd` requires `sgdisk` (usually from `gdisk` or
-`gptfdisk` packages) and `mtools`.
+## Features
 
-Assembly files with the `*.S` extension are built using the same toolchain as
-the C sources. Only `*.asm` files, of which the template ships none, require
-`nasm`. The `run` targets require `qemu`.
+- **64-bit kernel:** Built for the x86-64 architecture.
+- **Limine bootloader:** Uses the Limine boot protocol.
+- **Framebuffer support:** Initializes and accesses the framebuffer provided by Limine.
+- **Text terminal:** Custom framebuffer-based text rendering using a 5×7 bitmap font.
+- **Terminal scrolling:** Basic line wrapping and scrolling.
+- **`kprintf`:** A custom formatted output function.
 
-### Toolchain selection
+### Supported `kprintf` format specifiers
 
-The `TOOLCHAIN` and `TOOLCHAIN_PREFIX` `make` variables can be used to set the
-toolchain. `TOOLCHAIN` can be set to `llvm` to use Clang/LLVM.
+| Specifier | Description |
+|---|---|
+| `%c` | Character |
+| `%s` | String |
+| `%d` | Signed integer |
+| `%u` | Unsigned integer |
+| `%x` | Hexadecimal |
+| `%%` | Literal percent sign |
 
-For example:
+## Project Structure
+
+```text
+eL-Kernel/
+├── images/
+│   └── vbelkernel.png
+├── kernel/
+│   ├── src/
+│   │   ├── main.c
+│   │   ├── memory.c
+│   │   ├── memory.h
+│   │   ├── terminal.c
+│   │   ├── terminal.h
+│   │   ├── kprintf.c
+│   │   └── kprintf.h
+│   ├── GNUmakefile
+│   └── get-deps
+├── GNUmakefile
+├── limine.conf
+└── README.md
 ```
-make TOOLCHAIN=llvm
+
+## Development Environment
+
+The project is currently developed and tested using:
+
+- Windows 11
+- MSYS2 UCRT64
+- GCC x86_64-elf cross-compiler
+- GNU Make
+- Oracle VirtualBox
+- Limine bootloader
+
+## Building
+
+Clone the repository:
+
+```bash
+git clone https://github.com/lyashwith/eL-Kernel.git
+cd eL-Kernel
 ```
-or:
-```
+
+Run the build from an environment with the required cross-compilation toolchain and dependencies installed:
+
+```bash
 make TOOLCHAIN_PREFIX=x86_64-elf-
 ```
 
-The kernel is linked through the compiler driver, using its default linker for
-GCC and LLD for Clang. A different linker can be picked by adding a `-fuse-ld=`
-option to `LDFLAGS`.
+The build produces:
 
-Link-time optimisation can be enabled by adding `-flto` to `CFLAGS`, for
-example:
-```
-make CFLAGS='-g -O2 -pipe -flto'
+```text
+template.iso
 ```
 
-### Makefile targets
+The ISO can be attached to a virtual machine in Oracle VirtualBox for testing.
 
-Running `make all` will compile the kernel (from the `kernel/` directory) and
-then generate a bootable ISO image.
+## Testing
 
-Running `make all-hdd` will compile the kernel and then generate a raw image
-suitable to be flashed onto a USB stick or hard drive/SSD.
+The kernel has successfully booted in Oracle VirtualBox with:
 
-Running `make run` will build the kernel and a bootable ISO (equivalent to make
-all) and then run it using `qemu` (if installed).
+- UEFI boot enabled
+- 64-bit execution
+- 1024 × 768 framebuffer
+- Custom text terminal output
 
-Running `make run-hdd` will build the kernel and a raw HDD image (equivalent to
-make all-hdd) and then run it using `qemu` (if installed).
+## Roadmap
 
-The `run-uefi` and `run-hdd-uefi` targets are equivalent to their non `-uefi`
-counterparts except that they boot `qemu` using a UEFI-compatible firmware.
+- [x] Initial Limine integration
+- [x] 64-bit kernel boot
+- [x] Framebuffer initialization
+- [x] Basic framebuffer terminal
+- [x] Custom `kprintf` implementation
+- [ ] Improve bitmap font and character support
+- [ ] Add keyboard input
+- [ ] Improve terminal functionality
+- [ ] Develop memory management
+- [ ] Explore interrupt handling
+- [ ] Expand kernel functionality
+
+## Project Goals
+
+The goal of eL-Kernel is to learn and experiment with operating system development from the ground up, gradually implementing the fundamental components of a kernel.
+
+This is an ongoing educational hobby project. Features and architecture may change as development progresses.
+
+## License
+
+Refer to the repository's license file for licensing information.
