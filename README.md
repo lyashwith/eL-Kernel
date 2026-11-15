@@ -1,5 +1,16 @@
-# eL-Kernel
 
+<div align="center">
+<table align="center">
+<tr>
+<td align="center" valign="middle">
+<img src="https://raw.githubusercontent.com/lyashwith/eL-Kernel/main/images/eL-KernelLogo.png" width="150" />
+</td>
+<td align="center" valign="middle">
+<h1>eL Kernel</h1>
+</td>
+</tr>
+</table>
+</div>
 **A hobby operating system kernel written in C for x86-64 architecture.**
 
 eL-Kernel is a learning-oriented kernel development project built using C and the [Limine](https://github.com/limine-bootloader/limine) bootloader. The project focuses on understanding low-level system programming, kernel development, framebuffer graphics and operating system fundamentals.
