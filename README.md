@@ -8,8 +8,11 @@ eL-Kernel is a learning-oriented kernel development project built using C and th
 
 ### First successful boot
 
-eL-Kernel successfully booting inside Oracle VirtualBox using the Limine bootloader.
+successfully booting inside Oracle VirtualBox using the Limine bootloader.
 
+![eL-Kernel running in Oracle VirtualBox](/images/Screenshot%202026-11-15%20180027.png)
+
+eL-Kernel successfully booting inside Oracle VirtualBox using the Limine bootloader.
 ![eL-Kernel running in Oracle VirtualBox](images/vbelkernel.png)
 
 **Boot configuration:** x86-64 · UEFI · 1024 × 768 framebuffer
