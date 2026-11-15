@@ -6,6 +6,7 @@
 #include <limine.h>
 
 #include "terminal.h"
+#include "kprintf.h"
 
 __attribute__((used, section(".limine_requests")))
 static volatile uint64_t limine_base_revision[] =
@@ -53,6 +54,13 @@ void kmain(void)
 
     terminal_init(framebuffer);
     terminal_clear();
+
+    kprintf("eL-Kernel booted!\n");
+    kprintf("------------------\n");
+    kprintf("Framebuffer ready.\n");
+    kprintf("Width: %u\n", (unsigned int)framebuffer->width);
+    kprintf("Height: %u\n", (unsigned int)framebuffer->height);
+    kprintf("Terminal ready!\n");
 
     hcf();
 }
