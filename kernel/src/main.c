@@ -52,7 +52,7 @@ void kmain(void)
     }
 
     terminal_init(framebuffer);
-    terminal_clear(0, 0, 0);
+    terminal_clear();
 
     hcf();
 }
